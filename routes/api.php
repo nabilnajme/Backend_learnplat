@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DetailController;
+use App\Http\Controllers\QuizController;
 
 
 
@@ -25,5 +26,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/dashboard/apprenant/profile', [AuthController::class, 'updateProfile']);
     Route::put('/dashboard/apprenant/profile/password', [AuthController::class, 'updatePassword']);
     Route::get('/courses/{courseId}/details', [DetailController::class, 'index']);
+    Route::get('/quizzes/{id}/questions', [QuizController::class, 'questions']);
+    Route::post('/quizzes/{id}/result', [QuizController::class, 'saveResult']);
+    Route::get('/my-results',[QuizController::class, 'myResults']);
+    
 
 });

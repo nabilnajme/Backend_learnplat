@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Course;
 use App\Models\Question;
+use App\Models\QuizResult;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Quiz extends Model
@@ -29,6 +30,11 @@ class Quiz extends Model
         return $this->hasMany(Question::class); 
         
     }
-    // public function results()   { return $this->hasMany(QuizResult::class); }
+    public function results() { 
+
+
+        return $this->hasMany(QuizResult::class); 
+        
+    }
 
 }

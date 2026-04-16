@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Course;
 use App\Models\Chapter;
 use App\Models\Quiz;
+use App\Models\Question;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -26,5 +27,7 @@ class DatabaseSeeder extends Seeder
 
 
         Quiz::factory()->count(10)->create();
+        Question::factory()->count(4)->create();
+
     }
 }
