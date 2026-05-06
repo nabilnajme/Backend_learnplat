@@ -19,14 +19,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create 10 chapters for course with id = 5
-        Chapter::factory()->count(10)->create([
-        'course_id' => 9, // force the relation
-    ]);
+        Course::factory()->count(8)->create();
+        Chapter::factory()->count(8)->create();
 
 
 
-        Quiz::factory()->count(10)->create();
+
+        Quiz::factory()->count(4)->create();
         Question::factory()->count(4)->create();
 
     }

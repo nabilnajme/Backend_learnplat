@@ -14,7 +14,9 @@ class DetailController extends Controller
         'chapters',
         'quizzes',
         
-    ])->findOrFail($courseId);
+    ])
+     ->withCount('enrollments') 
+    ->findOrFail($courseId);
 
     return response()->json($course);
     }

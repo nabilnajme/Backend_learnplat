@@ -13,14 +13,14 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name'     => 'required|string|max:100',
+            'name'  => 'required|string|max:100',
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|string|min:6',
             'role'     => 'in:apprenant,formateur',
         ]);
 
         $user = User::create([
-            'name'     => $request->name,
+               'name'     => $request->name,
             'email'    => $request->email,
             'password' => Hash::make($request->password),
             'role'     => $request->role ?? 'apprenant',
@@ -68,8 +68,7 @@ class AuthController extends Controller
     $request->validate([
         'name'  => 'required|string|max:100',
         'email' => 'required|email|unique:users,email,' . $request->user()->id, //Check that this email is unique among all users except the one with this ID
-    ]); 
-
+    ]);
     $user = $request->user();
     $user->name  = $request->name;
     $user->email = $request->email;
