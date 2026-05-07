@@ -22,6 +22,9 @@ Route::middleware('auth:sanctum')->group(function () {
     // Auth
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/courses', [CourseController::class, 'index']);
+
+
+    // ======================================Students==========================================//
     Route::post('/dashboard/apprenant/enroll/{id}', [CourseController::class, 'enroll']);
     Route::get('/dashboard/apprenant/enroll/enrollments', [CourseController::class, 'myenroll']);
     Route::put('/dashboard/apprenant/profile', [AuthController::class, 'updateProfile']);
@@ -37,7 +40,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 
+       //=======================================================Formateur ====================================================//
 
+       //Remeber to add a middleware 
 
 
 
@@ -50,16 +55,31 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 
-    // course CRUD
+    // ===============================================course CRUD==========================//
     Route::put('/courses/{id}',             [CourseController::class, 'update']);
     Route::delete('/courses/{id}',          [CourseController::class, 'destroy']);
 
-    // chapters
+    // ====================================chapters===============================================//
     Route::get('/courses/{id}/chapters',    [ChapterController::class, 'index']);
     Route::post('/courses/{id}/chapters',   [ChapterController::class, 'store']);
     Route::put('/chapters/{id}',            [ChapterController::class, 'update']);
     Route::delete('/chapters/{id}',         [ChapterController::class, 'destroy']);
     Route::get('/chapters/{id}', [ChapterController::class, 'show']);
+
+    //===========================================Quizs=========================================//
+    Route::get('/courses/{id}/quizzes',          [QuizController::class, 'index']);
+    Route::post('/courses/{id}/quizzes',         [QuizController::class, 'store']);
+    Route::put('/quizzes/{id}',                  [QuizController::class, 'update']);
+    Route::delete('/quizzes/{id}',               [QuizController::class, 'destroy']);
+    Route::get('/courses/{id}/quiz-analytics',   [QuizController::class, 'analytics']);
+
+
+
+
+    // ============================================questions==========================================//
+    Route::post('/quizzes/{id}/questions',       [QuizController::class, 'storeQuestion']);
+    Route::delete('/questions/{id}',             [QuizController::class, 'destroyQuestion']);
+
     
 
 });

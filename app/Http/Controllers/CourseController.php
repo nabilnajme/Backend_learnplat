@@ -131,12 +131,26 @@ public function publish(Request $request, $id)
 // DELETE /api/courses/{id}
 public function destroy(Request $request, $id)
 {
-    $course = Course::where('id', $id)
-                    ->where('formateur_id', $request->user()->id)
-                    ->firstOrFail();
+    $course = Course::withCount('enrollments')
+        ->where('id', $id)
+        ->where('formateur_id', $request->user()->id)
+        ->firstOrFail();
+
+    if ($course->enrollments_count > 0) {
+        return response()->json([
+            'error' => 'you cant delete this course cause it have already students in there'
+        ], 400);
+    }
+
+
+
     $course->delete();
     return response()->json(['message' => 'Cours supprimé.']);
 }
+
+
+
+
 
 // PUT /api/courses/{id}
 public function update(Request $request, $id)

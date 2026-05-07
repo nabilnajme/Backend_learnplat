@@ -36,8 +36,8 @@ class ChapterController extends Controller
         return response()->json($chapter, 201);
     }
 
-
-        // GET /api/chapters/{id}
+                    // Formateur section
+// GET /api/chapters/{id}
 public function show($id)
 {
     $chapter = Chapter::findOrFail($id);
