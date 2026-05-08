@@ -135,6 +135,7 @@ class QuizController extends Controller
     {
         // get all quizzes for this course
         $quizIds = Quiz::where('course_id', $courseId)->pluck('id');
+        
 
         // all results for those quizzes
         $results = QuizResult::whereIn('quiz_id', $quizIds)->get();
