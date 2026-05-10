@@ -6,7 +6,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\ChapterController;
-
+use App\Http\Controllers\AdminController;
 
 
 
@@ -81,6 +81,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/quizzes/{id}/questions',       [QuizController::class, 'storeQuestion']);
     Route::delete('/questions/{id}',             [QuizController::class, 'destroyQuestion']);
 
-    
+    // =======================================Admin ============================================//
+ 
+
+
+    Route::get('/admin/stats',            [AdminController::class, 'stats']);
+    Route::get('/admin/users',            [AdminController::class, 'users']);
+    Route::delete('/admin/users/{id}',    [AdminController::class, 'deleteUser']);
+    Route::get('/admin/courses',          [AdminController::class, 'courses']);
+    Route::delete('/admin/courses/{id}',  [AdminController::class, 'deleteCourse']);
 
 });
