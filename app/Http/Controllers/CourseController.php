@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Course;
+use App\Models\Chapter;
 use App\Models\Enrollment;
 use Illuminate\Http\Request;
 
@@ -56,7 +57,7 @@ class CourseController extends Controller
 
     }
 
-                   // Formateur Section
+ // ==============================================Formateur Section=================================
 
     // GET /api/formateur/stats
     public function stats(Request $request)
@@ -173,5 +174,30 @@ public function update(Request $request, $id)
 
     return response()->json($course);
 }
+
+public function latest(Request $request)
+{
+    $formateurId = $request->user()->id;
+
+    $courses = Course::where('formateur_id', $formateurId)
+                     ->with(['chapters', 'quizzes'])
+                     ->latest()
+                     ->take(4) 
+                     ->get();
+
+  $chapters = Chapter::whereHas('course', function($q) use ($formateurId) {
+                        $q->where('formateur_id', $formateurId);
+                    })
+                    ->with('course')
+                    ->latest()
+                    ->take(4)
+                    ->get();
+
+    return response()->json([
+        'courses' => $courses,
+        'chapters' => $chapters,
+    ]);
+}
+
     
 }

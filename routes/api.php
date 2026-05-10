@@ -50,6 +50,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/formateur/stats',          [CourseController::class, 'stats']);
     Route::get('/formateur/courses',        [CourseController::class, 'myCourses']);
     Route::post('/courses',                 [CourseController::class, 'store']);
+    Route::get('/formateur/latest',         [CourseController::class, 'latest']);
     Route::put('/courses/{id}/publish',     [CourseController::class, 'publish']);
 
 
@@ -64,7 +65,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/courses/{id}/chapters',   [ChapterController::class, 'store']);
     Route::put('/chapters/{id}',            [ChapterController::class, 'update']);
     Route::delete('/chapters/{id}',         [ChapterController::class, 'destroy']);
-    Route::get('/chapters/{id}', [ChapterController::class, 'show']);
+    Route::get('/chapters/{id}',            [ChapterController::class, 'show']);
 
     //===========================================Quizs=========================================//
     Route::get('/courses/{id}/quizzes',          [QuizController::class, 'index']);
